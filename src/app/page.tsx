@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import FiltersBar, { type FilterOption } from "@/components/FiltersBar";
 import Sekmeler from "@/components/Sekmeler";
+import Link from "next/link";
 
 type UlkeRelation = { ad: string; kod: string | null } | { ad: string; kod: string | null }[] | null;
 type DalRelation = { id: string; ad: string } | { id: string; ad: string }[] | null;
@@ -303,28 +304,31 @@ function YarismaKarti({ yarisma, soluk = false }: { yarisma: Yarisma; soluk?: bo
   const konum = [ulkeAdi, yarisma.sehir].filter(Boolean).join(", ");
 
   return (
-    <li
-      className={`border border-slate-200 rounded-lg p-4 ${
-        soluk ? "opacity-60" : ""
-      }`}
-    >
-      <h3 className="font-semibold text-lg">{yarisma.ad}</h3>
-      <p className="text-sm text-slate-600 mt-1">{tarihAraligi(yarisma)}</p>
-      {konum && <p className="text-sm text-slate-600">{konum}</p>}
-      {yarisma.tr_katilim_var_mi && (
-        <p className="text-xs text-green-700 mt-1">🇹🇷 Türk katılımcı var</p>
-      )}
-      {dallar.length > 0 && (
-        <p className="text-sm text-slate-700 mt-2">
-          <span className="font-medium">Dallar:</span> {dallar.join(", ")}
-        </p>
-      )}
-      {yasGruplari.length > 0 && (
-        <p className="text-sm text-slate-700">
-          <span className="font-medium">Yaş grupları:</span>{" "}
-          {yasGruplari.join(", ")}
-        </p>
-      )}
+    <li>
+      <Link
+        href={`/yarisma/${yarisma.id}`}
+        className={`block border border-slate-200 rounded-lg p-4 hover:bg-slate-50 hover:border-slate-300 transition cursor-pointer ${
+          soluk ? "opacity-60" : ""
+        }`}
+      >
+        <h3 className="font-semibold text-lg">{yarisma.ad}</h3>
+        <p className="text-sm text-slate-600 mt-1">{tarihAraligi(yarisma)}</p>
+        {konum && <p className="text-sm text-slate-600">{konum}</p>}
+        {yarisma.tr_katilim_var_mi && (
+          <p className="text-xs text-green-700 mt-1">🇹🇷 Türk katılımcı var</p>
+        )}
+        {dallar.length > 0 && (
+          <p className="text-sm text-slate-700 mt-2">
+            <span className="font-medium">Dallar:</span> {dallar.join(", ")}
+          </p>
+        )}
+        {yasGruplari.length > 0 && (
+          <p className="text-sm text-slate-700">
+            <span className="font-medium">Yaş grupları:</span>{" "}
+            {yasGruplari.join(", ")}
+          </p>
+        )}
+      </Link>
     </li>
   );
 }

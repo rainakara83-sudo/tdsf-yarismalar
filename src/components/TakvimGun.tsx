@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export type TakvimYarisma = {
   id: string;
   ad: string;
@@ -64,9 +66,10 @@ export default function TakvimGun({
       </div>
       <div className="mt-1 space-y-1">
         {yarismalar.map((y) => (
-          <div
+          <Link
             key={y.id}
-            className={`px-1.5 py-0.5 rounded text-[10px] leading-tight truncate ${
+            href={`/yarisma/${y.id}`}
+            className={`block px-1.5 py-0.5 rounded text-[10px] leading-tight truncate cursor-pointer hover:opacity-80 ${
               y.gecmis
                 ? "bg-slate-100 text-slate-500"
                 : "bg-blue-100 text-blue-800"
@@ -75,7 +78,7 @@ export default function TakvimGun({
           >
             <span className="mr-0.5">{bayrak(y.ulkeKod)}</span>
             {y.ad}
-          </div>
+          </Link>
         ))}
       </div>
     </div>

@@ -224,8 +224,8 @@ export default async function TakvimPage({
           .map((y) => (
             <Link
               key={y.id}
-              href="/"
-              className={`block border border-slate-200 rounded p-3 mb-2 ${
+              href={`/yarisma/${y.id}`}
+              className={`block border border-slate-200 rounded p-3 mb-2 hover:bg-slate-50 cursor-pointer ${
                 y.gecmis ? "opacity-60" : ""
               }`}
             >
