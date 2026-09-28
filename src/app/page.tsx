@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import FiltersBar, { type FilterOption } from "@/components/FiltersBar";
+import Sekmeler from "@/components/Sekmeler";
 
 type UlkeRelation = { ad: string; kod: string | null } | { ad: string; kod: string | null }[] | null;
 type DalRelation = { id: string; ad: string } | { id: string; ad: string }[] | null;
@@ -168,6 +169,7 @@ export default async function Home({
 
   return (
     <main className="min-h-screen bg-white text-slate-900 px-4 py-8 max-w-3xl mx-auto">
+      <Sekmeler aktif="liste" />
       <header className="mb-6">
         <h1 className="text-3xl font-bold">Yaklaşan Dans Yarışmaları</h1>
         <p className="text-slate-600 mt-2">
