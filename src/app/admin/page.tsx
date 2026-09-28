@@ -1,7 +1,5 @@
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { logout } from "./login/actions";
 
 export default async function AdminPage() {
   const supabase = await createClient();
@@ -9,45 +7,50 @@ export default async function AdminPage() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) {
-    redirect("/admin/login");
-  }
+  const { count: toplam } = await supabase
+    .from("yarismalar")
+    .select("*", { count: "exact", head: true });
+
+  const { count: yayinda } = await supabase
+    .from("yarismalar")
+    .select("*", { count: "exact", head: true })
+    .eq("durum", "yayinda");
+
+  const { count: taslak } = await supabase
+    .from("yarismalar")
+    .select("*", { count: "exact", head: true })
+    .eq("durum", "taslak");
 
   return (
-    <main className="min-h-screen bg-slate-50 px-4 py-8">
-      <div className="max-w-3xl mx-auto">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="text-2xl font-bold text-slate-900">Yönetim Paneli</h1>
-            <p className="text-sm text-slate-600 mt-1">
-              Hoş geldin, <span className="font-medium">{user.email}</span>
-            </p>
-          </div>
-          <form action={logout}>
-            <button
-              type="submit"
-              className="text-sm border border-slate-300 rounded px-3 py-1.5 hover:bg-white"
-            >
-              Çıkış Yap
-            </button>
-          </form>
-        </div>
-
-        <section className="bg-white border border-slate-200 rounded-lg p-6">
-          <h2 className="text-lg font-semibold text-slate-800 mb-2">
-            Yarışmalar
-          </h2>
-          <p className="text-sm text-slate-500">
-            Yarışma ekleme/düzenleme bir sonraki adımda gelecek.
-          </p>
-        </section>
-
-        <p className="text-center mt-6 text-sm">
-          <Link href="/" className="text-slate-600 hover:text-slate-900">
-            ← Ana sayfaya dön
-          </Link>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold text-slate-900">Yönetim Paneli</h1>
+        <p className="text-sm text-slate-600 mt-1">
+          Hoş geldin, <span className="font-medium">{user?.email}</span>
         </p>
       </div>
-    </main>
+
+      <div className="grid grid-cols-3 gap-3">
+        <div className="bg-white border border-slate-200 rounded-lg p-4">
+          <p className="text-xs text-slate-500">Toplam</p>
+          <p className="text-2xl font-bold text-slate-900">{toplam ?? 0}</p>
+        </div>
+        <div className="bg-white border border-slate-200 rounded-lg p-4">
+          <p className="text-xs text-slate-500">Yayında</p>
+          <p className="text-2xl font-bold text-green-700">{yayinda ?? 0}</p>
+        </div>
+        <div className="bg-white border border-slate-200 rounded-lg p-4">
+          <p className="text-xs text-slate-500">Taslak</p>
+          <p className="text-2xl font-bold text-slate-700">{taslak ?? 0}</p>
+        </div>
+      </div>
+
+      <Link
+        href="/admin/yarismalar"
+        className="block bg-blue-600 text-white text-center py-3 rounded-lg font-medium hover:bg-blue-700"
+      >
+        Yarışmaları Yönet →
+      </Link>
+    </div>
   );
 }
