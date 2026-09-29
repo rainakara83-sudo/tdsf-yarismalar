@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+export const runtime = "nodejs";
 import LoginForm from "./LoginForm";
 
 export default function AdminLoginPage() {

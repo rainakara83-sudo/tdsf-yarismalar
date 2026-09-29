@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+export const runtime = "nodejs";
 import { createClient } from "@/lib/supabase/server";
 import TakvimGun, { type TakvimYarisma, bayrak } from "@/components/TakvimGun";
 import Sekmeler from "@/components/Sekmeler";

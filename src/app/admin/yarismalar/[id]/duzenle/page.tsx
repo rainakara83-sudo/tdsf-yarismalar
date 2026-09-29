@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+export const runtime = "nodejs";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import YarismaForm from "../../YarismaForm";

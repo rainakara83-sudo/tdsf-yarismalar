@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+export const runtime = "nodejs";
 import { createClient } from "@/lib/supabase/server";
 import { yarismaSil, yarismaKopya } from "./actions";
 import SilButonu from "./SilButonu";

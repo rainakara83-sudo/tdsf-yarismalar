@@ -1,4 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
+
+export const runtime = "nodejs";
 import FiltersBar, { type FilterOption } from "@/components/FiltersBar";
 import Sekmeler from "@/components/Sekmeler";
 import Link from "next/link";
