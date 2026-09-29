@@ -131,3 +131,65 @@ export async function yarismaSil(id: string): Promise<void> {
   revalidatePath("/admin/yarismalar");
   redirect("/admin/yarismalar");
 }
+
+export async function yarismaKopya(id: string): Promise<void> {
+  const supabase = await authAdmin();
+
+  const { data: y, error: e1 } = await supabase
+    .from("yarismalar")
+    .select(
+      "*, yarisma_dallar(dal_id), yarisma_yas_gruplari(yas_grubu_id)"
+    )
+    .eq("id", id)
+    .single();
+
+  if (e1 || !y) throw new Error(e1?.message ?? "Yarışma bulunamadı");
+
+  const { data: ny, error: e2 } = await supabase
+    .from("yarismalar")
+    .insert({
+      ad: `${y.ad} (Kopya)`,
+      baslangic_tarihi: y.baslangic_tarihi,
+      bitis_tarihi: y.bitis_tarihi,
+      ulke_id: y.ulke_id,
+      sehir: y.sehir,
+      salon: y.salon,
+      organizator: y.organizator,
+      organizasyon: y.organizasyon,
+      kayit_son_tarihi: null,
+      kayit_linki: null,
+      program_linki: null,
+      sonuc_linki: null,
+      tr_katilim_var_mi: y.tr_katilim_var_mi,
+      notlar: y.notlar,
+      durum: "taslak",
+    })
+    .select()
+    .single();
+
+  if (e2 || !ny) throw new Error(e2?.message ?? "Kopya oluşturulamadı");
+
+  if (y.yarisma_dallar?.length) {
+    await supabase
+      .from("yarisma_dallar")
+      .insert(
+        y.yarisma_dallar.map((d: { dal_id: string }) => ({
+          yarisma_id: ny.id,
+          dal_id: d.dal_id,
+        }))
+      );
+  }
+  if (y.yarisma_yas_gruplari?.length) {
+    await supabase
+      .from("yarisma_yas_gruplari")
+      .insert(
+        y.yarisma_yas_gruplari.map((yg: { yas_grubu_id: string }) => ({
+          yarisma_id: ny.id,
+          yas_grubu_id: yg.yas_grubu_id,
+        }))
+      );
+  }
+
+  revalidatePath("/admin/yarismalar");
+  redirect(`/admin/yarismalar/${ny.id}/duzenle`);
+}

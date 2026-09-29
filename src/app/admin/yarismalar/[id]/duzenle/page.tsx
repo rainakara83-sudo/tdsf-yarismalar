@@ -2,8 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import YarismaForm from "../../YarismaForm";
-import { yarismaGuncelle, yarismaSil } from "../../actions";
+import { yarismaGuncelle, yarismaSil, yarismaKopya } from "../../actions";
 import SilButonu from "../../SilButonu";
+import KopyaButonu from "./KopyaButonu";
 
 type DalRelation = { dal_id: string } | { dal_id: string }[] | null;
 type YasRelation = { yas_grubu_id: string } | { yas_grubu_id: string }[] | null;
@@ -90,9 +91,14 @@ export default async function DuzenlePage({
           submitLabel="Güncelle"
           iptalHref="/admin/yarismalar"
           extra={
-            <form action={yarismaSil.bind(null, id)} className="ml-auto">
-              <SilButonu id={id} ad={y.ad ?? ""} />
-            </form>
+            <div className="ml-auto flex items-center gap-2">
+              <form action={yarismaKopya.bind(null, id)}>
+                <KopyaButonu id={id} ad={y.ad ?? ""} />
+              </form>
+              <form action={yarismaSil.bind(null, id)}>
+                <SilButonu id={id} ad={y.ad ?? ""} />
+              </form>
+            </div>
           }
         />
       </div>

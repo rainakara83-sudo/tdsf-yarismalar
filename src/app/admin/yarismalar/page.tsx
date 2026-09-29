@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { yarismaSil } from "./actions";
+import { yarismaSil, yarismaKopya } from "./actions";
 import SilButonu from "./SilButonu";
+import KopyaButonu from "./KopyaButonu";
 
 type UlkeRelation = { ad: string; kod: string | null } | { ad: string; kod: string | null }[] | null;
 
@@ -139,6 +140,9 @@ export default async function AdminYarismalarPage() {
                       >
                         Düzenle
                       </Link>
+                      <form action={yarismaKopya.bind(null, y.id)}>
+                        <KopyaButonu id={y.id} ad={y.ad} />
+                      </form>
                       <form action={yarismaSil.bind(null, y.id)}>
                         <SilButonu id={y.id} ad={y.ad} />
                       </form>
