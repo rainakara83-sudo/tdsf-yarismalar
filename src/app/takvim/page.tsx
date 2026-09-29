@@ -214,16 +214,21 @@ export default async function TakvimPage({
 
       {/* Mobil liste */}
       <div className="sm:hidden">
-        {tumYarismalar
-          .filter((y) => {
-            const ayBas =
-              `${yil.toString().padStart(4, "0")}-${ay.toString().padStart(2, "0")}-01`;
-            const aySon = new Date(yil, ay, 0);
-            const aySonStr =
-              `${yil.toString().padStart(4, "0")}-${ay.toString().padStart(2, "0")}-${aySon.getDate().toString().padStart(2, "0")}`;
-            return !(y.bitis_tarihi < ayBas || y.baslangic_tarihi > aySonStr);
-          })
-          .map((y) => (
+        {(() => {
+          const ayBas =
+            `${yil.toString().padStart(4, "0")}-${ay.toString().padStart(2, "0")}-01`;
+          const aySon = new Date(yil, ay, 0);
+          const aySonStr =
+            `${yil.toString().padStart(4, "0")}-${ay.toString().padStart(2, "0")}-${aySon.getDate().toString().padStart(2, "0")}`;
+          const liste = tumYarismalar.filter(
+            (y) => !(y.bitis_tarihi < ayBas || y.baslangic_tarihi > aySonStr)
+          );
+          if (liste.length === 0) {
+            return (
+              <p className="text-sm text-slate-500">Bu ay yarışma yok.</p>
+            );
+          }
+          return liste.map((y) => (
             <Link
               key={y.id}
               href={`/yarisma/${y.id}`}
@@ -239,10 +244,8 @@ export default async function TakvimPage({
                 </span>
               </div>
             </Link>
-          ))}
-        {tumYarismalar.length === 0 && (
-          <p className="text-sm text-slate-500">Bu ay yarışma yok.</p>
-        )}
+          ));
+        })()}
       </div>
     </main>
   );

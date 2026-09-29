@@ -49,7 +49,7 @@ export default function TakvimGun({
 
   return (
     <div
-      className={`min-h-[88px] border border-slate-200 p-1.5 text-xs ${
+      className={`min-h-[88px] min-w-0 border border-slate-200 p-1.5 text-xs ${
         buAy ? "bg-white" : "bg-slate-50 text-slate-400"
       }`}
     >
