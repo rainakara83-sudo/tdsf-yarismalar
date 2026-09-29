@@ -40,6 +40,9 @@ yarn-error.log*
 .env.local
 .env*.local
 
+# allow .env.example template
+!.env.example
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
