@@ -185,7 +185,15 @@ export default async function TakvimPage({
 
       {/* Masaüstü takvim */}
       <div className="hidden sm:block">
-        <div className="grid grid-cols-7 gap-0 mb-1">
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(7, minmax(0, 1fr))",
+            gap: "4px",
+            width: "100%",
+          }}
+          className="mb-1"
+        >
           {gunAdlari.map((g) => (
             <div
               key={g}
@@ -195,7 +203,14 @@ export default async function TakvimPage({
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-7 gap-0">
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(7, minmax(0, 1fr))",
+            gap: "4px",
+            width: "100%",
+          }}
+        >
           {hucreler.map((h, i) => {
             const list = hucreYarismalari(h);
             return (
