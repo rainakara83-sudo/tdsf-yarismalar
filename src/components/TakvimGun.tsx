@@ -57,7 +57,7 @@ export default function TakvimGun({
         <span
           className={`inline-flex items-center justify-center text-xs ${
             isToday
-              ? "bg-blue-600 text-white rounded-full w-5 h-5 font-bold"
+              ? "bg-red-600 text-white rounded-full w-5 h-5 font-bold"
               : ""
           }`}
         >
@@ -72,7 +72,7 @@ export default function TakvimGun({
             className={`block px-1.5 py-0.5 rounded text-[10px] leading-tight truncate cursor-pointer hover:opacity-80 ${
               y.gecmis
                 ? "bg-slate-100 text-slate-500"
-                : "bg-blue-100 text-blue-800"
+                : "bg-red-100 text-red-800"
             }`}
             title={`${y.ad} (${y.ulkeAd})`}
           >

@@ -114,7 +114,7 @@ export default function FiltersBar({
                 onClick={() => toggleListe(dallarSecili, d.id, setDallarSecili)}
                 className={`text-xs px-2 py-1.5 rounded border text-left transition ${
                   secili
-                    ? "bg-blue-600 text-white border-blue-600"
+                    ? "bg-red-600 text-white border-red-600"
                     : "bg-white text-slate-700 border-slate-300 hover:border-slate-400"
                 }`}
               >
@@ -139,7 +139,7 @@ export default function FiltersBar({
                 onClick={() => toggleListe(yasSecili, yg.id, setYasSecili)}
                 className={`text-xs px-2 py-1.5 rounded border text-left transition ${
                   secili
-                    ? "bg-blue-600 text-white border-blue-600"
+                    ? "bg-red-600 text-white border-red-600"
                     : "bg-white text-slate-700 border-slate-300 hover:border-slate-400"
                 }`}
               >
@@ -190,7 +190,7 @@ export default function FiltersBar({
       <div className="flex items-center gap-3 pt-2">
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-blue-700"
+          className="bg-red-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-red-700"
         >
           Filtrele
         </button>

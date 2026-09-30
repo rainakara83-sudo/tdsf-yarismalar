@@ -235,7 +235,7 @@ export default function YarismaForm({
       <div className="flex gap-2 pt-2 border-t border-slate-200">
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-blue-700"
+          className="bg-red-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-red-700"
         >
           {submitLabel}
         </button>
@@ -252,7 +252,7 @@ export default function YarismaForm({
 }
 
 const inputCls =
-  "w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
+  "w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-500";
 
 function Alan({
   label,

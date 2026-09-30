@@ -150,7 +150,7 @@ export default async function YarismaDetay({
       ? "bg-red-100 text-red-800 border border-red-300"
       : uyari?.tip === "sari"
       ? "bg-amber-100 text-amber-800 border border-amber-300"
-      : "bg-blue-100 text-blue-800 border border-blue-300";
+      : "bg-red-100 text-red-800 border border-red-300";
 
   return (
     <main className="min-h-screen bg-white text-slate-900 px-4 py-8 max-w-3xl mx-auto">
@@ -242,7 +242,7 @@ export default async function YarismaDetay({
                 href={yarisma.kayit_linki}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-blue-700"
+                className="inline-block bg-red-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-red-700"
               >
                 Kayıt Ol
               </a>

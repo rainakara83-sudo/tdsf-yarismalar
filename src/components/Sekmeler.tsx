@@ -4,7 +4,7 @@ export default function Sekmeler({ aktif }: { aktif: "liste" | "takvim" }) {
   const cls = (a: "liste" | "takvim") =>
     `px-4 py-2 text-sm font-medium border-b-2 ${
       aktif === a
-        ? "border-blue-600 text-blue-700"
+        ? "border-red-600 text-red-700"
         : "border-transparent text-slate-600 hover:text-slate-900"
     }`;
   return (

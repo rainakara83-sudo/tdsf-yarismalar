@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 export const runtime = "nodejs";
 import FiltersBar, { type FilterOption } from "@/components/FiltersBar";
 import Sekmeler from "@/components/Sekmeler";
+import Logo from "@/components/Logo";
 import Link from "next/link";
 
 type UlkeRelation = { ad: string; kod: string | null } | { ad: string; kod: string | null }[] | null;
@@ -173,14 +174,17 @@ export default async function Home({
   return (
     <main className="min-h-screen bg-white text-slate-900 px-4 py-8 max-w-3xl mx-auto">
       <Sekmeler aktif="liste" />
-      <header className="mb-6">
-        <h1 className="text-3xl font-bold">Yaklaşan Dans Yarışmaları</h1>
-        <p className="text-slate-600 mt-2">
-          Türkiye Dans Sporları Federasyonu
-        </p>
-        <p className="text-sm text-slate-500 mt-2">
-          {filtreli.length} yarışma bulundu
-        </p>
+      <header className="mb-6 flex items-center gap-4">
+        <Logo size={56} />
+        <div>
+          <h1 className="text-3xl font-bold">Yaklaşan Dans Yarışmaları</h1>
+          <p className="text-slate-600 mt-1">
+            Türkiye Dans Sporları Federasyonu
+          </p>
+          <p className="text-sm text-slate-500 mt-1">
+            {filtreli.length} yarışma bulundu
+          </p>
+        </div>
       </header>
 
       <FiltersBar
@@ -284,7 +288,7 @@ function AktifFiltreEtiketleri({
       {etiketler.map((e) => (
         <span
           key={e}
-          className="text-xs bg-blue-50 text-blue-700 border border-blue-200 rounded-full px-2 py-1"
+          className="text-xs bg-red-50 text-red-700 border border-red-200 rounded-full px-2 py-1"
         >
           {e}
         </span>

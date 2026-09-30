@@ -49,7 +49,7 @@ export default async function AdminPage() {
 
       <Link
         href="/admin/yarismalar"
-        className="block bg-blue-600 text-white text-center py-3 rounded-lg font-medium hover:bg-blue-700"
+        className="block bg-red-600 text-white text-center py-3 rounded-lg font-medium hover:bg-red-700"
       >
         Yarışmaları Yönet →
       </Link>
